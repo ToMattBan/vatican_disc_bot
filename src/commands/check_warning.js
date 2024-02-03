@@ -45,7 +45,7 @@ module.exports = {
     const targetServer = interaction.guild.members.cache.get(target.id);
     const targetNick = targetServer.nickname ?? target.globalName;
     
-    const totalWarnings = warningStore[target.username]?.warning?.length || 0;
+    const totalWarnings = warningStore[target.username]?.warnings?.length || 0;
 
     await interaction.reply(
       `There is a total of ${bold(totalWarnings + ' warning(s)')} for ${targetNick}.`
