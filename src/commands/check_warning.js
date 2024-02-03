@@ -24,7 +24,7 @@ module.exports = {
       option
         .setName("member")
         .setDescription("The member that you want to check.")
-        .setRequired(true)
+        .setRequired(false)
     ),
 
   async execute(interaction) {
@@ -42,13 +42,25 @@ module.exports = {
     const warningStore = cleanOldWarnings(dirtWarningStore);
 
     const target = interaction.options.getUser("member");
-    const targetServer = interaction.guild.members.cache.get(target.id);
-    const targetNick = targetServer.nickname ?? target.globalName;
-    
-    const totalWarnings = warningStore[target.username]?.warnings?.length || 0;
+    if (target) {
+      const targetServer = interaction.guild.members.cache.get(target.id);
+      const targetNick = targetServer.nickname ?? target.globalName;
 
-    await interaction.reply(
-      `There is a total of ${bold(totalWarnings + ' warning(s)')} for ${targetNick}.`
-    );
+      const totalWarnings =
+        warningStore[target.username]?.warnings?.length || 0;
+
+      await interaction.reply(
+        `There is a total of ${bold(
+          totalWarnings + " warning(s)"
+        )} for ${targetNick}.`
+      );
+    } else {
+      let allWarnings = "";
+      for (var user in warningStore) {
+        allWarnings += `\nThe user ${bold(warningStore[user].nickname)} have a total of ${bold(warningStore[user].warnings.length)} warnings`
+      }
+
+      await interaction.reply(allWarnings);
+    }
   },
 };
