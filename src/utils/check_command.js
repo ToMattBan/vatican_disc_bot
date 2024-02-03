@@ -1,4 +1,4 @@
-function checkCommand(command) {
+function checkCommandExists(command) {
   if (command && command.data && command.execute) {
     return true;
   } else {
@@ -10,4 +10,4 @@ function checkCommand(command) {
   }
 }
 
-module.exports = { checkCommand };
+module.exports = { checkCommandExists };

@@ -1,12 +1,12 @@
 const { REST, Routes } = require("discord.js");
 const dotenv = require("dotenv");
-const { checkCommand } = require("./utils/check_command");
+const { checkCommandExists } = require("./utils/check_command");
 
 dotenv.config();
 
 const allCommands = require("./commands/index");
 const commands = allCommands
-  .filter(checkCommand)
+  .filter(checkCommandExists)
   .map((command) => command.data.toJSON());
 
 const rest = new REST().setToken(process.env.BOT_TOKEN);

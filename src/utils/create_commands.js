@@ -1,9 +1,9 @@
 const allCommands = require("../commands/index");
-const { checkCommand } = require("./check_command");
+const { checkCommandExists } = require("./check_command");
 
 function createCommands(commandCollection) {
   allCommands.forEach((command) => {
-    if (checkCommand(command)) {
+    if (checkCommandExists(command)) {
       commandCollection.set(command.data.name, command);
     }
   });

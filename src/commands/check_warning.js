@@ -18,12 +18,12 @@ function cleanOldWarnings(store) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("warning")
-    .setDescription("Create a warning for a user.")
+    .setName("check_warning")
+    .setDescription("Check how many warnings a user have.")
     .addUserOption((option) =>
       option
         .setName("member")
-        .setDescription("The member that has been warned")
+        .setDescription("The member that you want to check.")
         .setRequired(true)
     ),
 
@@ -44,24 +44,11 @@ module.exports = {
     const target = interaction.options.getUser("member");
     const targetServer = interaction.guild.members.cache.get(target.id);
     const targetNick = targetServer.nickname ?? target.globalName;
-
-    if (!warningStore[target.username]) {
-      warningStore[target.username] = {
-        nickname: targetNick,
-        warnings: [],
-      };
-    }
-
-    warningStore[target.username].warnings.push(new Date());
-    await storeWritter("warnings", warningStore);
-
-    const totalWarnings = warningStore[target.username].warnings.length;
-    const suspensionMessage =
-      totalWarnings >= 3 ? "\nThis player should be suspended or kicked" : "";
+    
+    const totalWarnings = warningStore[target.username]?.warning?.length || 0;
 
     await interaction.reply(
-      `A warning for ${bold(targetNick)} has been added.` +
-        `\nThere is a total of ${bold(totalWarnings + ' warning(s)')} for this player.${suspensionMessage}`
+      `There is a total of ${bold(totalWarnings + ' warning(s)')} for ${targetNick}.`
     );
   },
 };

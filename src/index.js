@@ -1,5 +1,6 @@
 const { Client, Collection, Events, GatewayIntentBits } = require("discord.js");
 const dotenv = require("dotenv");
+
 const { createCommands } = require("./utils/create_commands");
 
 /* Guild == Server */
