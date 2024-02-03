@@ -22,9 +22,9 @@ module.exports = {
       return;
     }
 
-    const target = interaction.options.getUser('member');
+    const target = interaction.options.getUser("member");
     const targetServer = interaction.guild.members.cache.get(target.id);
-    const targetNick = bold(targetServer.nickname)
+    const targetNick = bold(targetServer.nickname);
 
     await interaction.reply(`A warning for ${targetNick} has been added`);
   },

@@ -3,7 +3,7 @@ function checkCommand(command) {
     return true;
   } else {
     console.error(
-      `[WARNING] The command is missing a required "data" or "execute" property.`
+      '[WARNING] The command is missing a required "data" or "execute" property.'
     );
 
     return false;
