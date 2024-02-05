@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
-const { storeReader, storeWritter } = require("../utils/storeHandler");
+const { storeReader } = require("../utils/storeHandler");
 const twoWeeksPeriod = 14 * 24 * 60 * 60 * 1000;
 
 function cleanOldWarnings(store) {
@@ -28,15 +28,7 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const senateId = "1197202319641677884";
-    if (!interaction.member.roles.cache.has(senateId)) {
-      await interaction.reply({
-        content: "You don't have the permission execute this command",
-        ephemeral: true,
-      });
-
-      return;
-    }
+    if (!checkPermissions(interaction, 'senate')) return;
 
     const dirtWarningStore = await storeReader("warnings");
     const warningStore = cleanOldWarnings(dirtWarningStore);
