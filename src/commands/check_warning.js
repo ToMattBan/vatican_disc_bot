@@ -1,5 +1,6 @@
 const { SlashCommandBuilder, bold } = require("discord.js");
 const { storeReader } = require("../utils/storeHandler");
+const { checkPermissions } = require("../utils/check_permission");
 const twoWeeksPeriod = 14 * 24 * 60 * 60 * 1000;
 
 function cleanOldWarnings(store) {
