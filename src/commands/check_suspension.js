@@ -44,8 +44,24 @@ module.exports = {
         message = `The target ${bold(targetNick)} have ${suspensionStore[target.username].suspensions.length} suspensions:`;
         
         suspensionStore[target.username].suspensions.forEach(suspension => {
-          const period = suspension.type.includes("5d") ? "5 days" : "2 weeks";
-          message += `\nA ${bold(period)} suspension that ends on ${bold(new Date(suspension.endDate).toISOString().split('T')[0])}`
+          let period = '';
+
+          switch (suspension.type) {
+            case '5d_coms':
+              period = "5 day suspension from commisions"
+              break;
+            case '2w_coms':
+              period = "2 weeks suspension from comissions"
+              break;
+            case '2w_letters':
+              period = "2 weeks suspension from using letters of recomendation"
+              break;
+            case '2w_secondary_guild':
+              period = "2 weeks suspension to the secondary guild"
+              break;
+          }
+
+          message += `\nA ${bold(period)} that ends on ${bold(new Date(suspension.endDate).toISOString().split('T')[0])}`
         })
       } else {
         message = `The user ${bold(targetNick)} don't have any currrent suspensions`;
