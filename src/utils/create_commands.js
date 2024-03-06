@@ -1,4 +1,4 @@
-const allCommands = require("../commands/index");
+const allCommands = require("../commands/_index");
 const { checkCommandExists } = require("./check_command");
 
 function createCommands(commandCollection) {

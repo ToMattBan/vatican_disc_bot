@@ -4,7 +4,7 @@ const { checkCommandExists } = require("./utils/check_command");
 
 dotenv.config();
 
-const allCommands = require("./commands/index");
+const allCommands = require("./commands/_index");
 const commands = allCommands
   .filter(checkCommandExists)
   .map((command) => command.data.toJSON());
